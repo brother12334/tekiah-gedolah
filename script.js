@@ -28,9 +28,14 @@
     });
   }
 
-  /* ---------- Sticky header ----------------------------- */
+  /* ---------- Sticky header + scroll progress ----------- */
   const header = $('#header');
-  const onScroll = () => header.classList.toggle('is-stuck', window.scrollY > 40);
+  const progress = $('#progress');
+  const onScroll = () => {
+    header.classList.toggle('is-stuck', window.scrollY > 40);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+  };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
