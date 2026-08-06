@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Teki'ah Gedolah — Tequila. It Will Blow You Away.</title>
+<meta name="description" content="Teki'ah Gedolah: a kosher-certified Reposado Cristalino tequila, 100% agave azul, produced in Tequila, Jalisco and named for the last long blast of the shofar." />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ AGE GATE ============ -->
+<div class="age-gate" id="ageGate" hidden>
+  <div class="age-gate__card">
+    <span class="logo logo--gate" role="img" aria-label="Teki'ah Gedolah"></span>
+    <span class="eyebrow">Tequila · Reposado Cristalino</span>
+    <h2>Are you of legal<br />drinking age?</h2>
+    <p>You must be 21 or older to enter. Please celebrate responsibly.</p>
+    <div class="age-gate__actions">
+      <button class="btn btn--gold" data-age="yes">Yes, I am 21+</button>
+      <button class="btn btn--ghost" data-age="no">No</button>
+    </div>
+    <small class="age-gate__deny" hidden>Sorry — you must be of legal drinking age to enter.</small>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="header">
+  <div class="wrap header__inner">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="brand" href="#home" aria-label="Teki'ah Gedolah — home">
+      <span class="logo" role="img" aria-label="Teki'ah Gedolah"></span>
+      <small class="brand__sub">Tequila</small>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#home" class="is-active">Home</a>
+      <a href="#bottle">The Bottle</a>
+      <a href="#story">Our Story</a>
+      <a href="#ritual">The Ritual</a>
+      <a href="#locator">Where to Buy</a>
+      <a href="#contact">Connect us</a>
+    </nav>
+
+    <button class="search-btn" id="searchBtn" aria-label="Search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Slide-out drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__panel">
+    <button class="drawer__close" id="drawerClose" aria-label="Close menu">&times;</button>
+    <nav class="drawer__nav">
+      <a href="#home">Home</a>
+      <a href="#bottle">The Bottle</a>
+      <a href="#story">Our Story</a>
+      <a href="#ritual">The Ritual</a>
+      <a href="#table">The Table</a>
+      <a href="#locator">Where to Buy</a>
+      <a href="#contact">Connect us</a>
+    </nav>
+    <div class="drawer__meta">
+      <p>L'Shana Tova U'Metuka</p>
+      <p>Tequila, Jalisco · NOM 1438</p>
+      <p>shalom@tequilagedolah.com</p>
+    </div>
+  </div>
+  <div class="drawer__scrim" data-close-drawer></div>
+</div>
+
+<!-- Search overlay -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <button class="search-overlay__close" data-close-search aria-label="Close search">&times;</button>
+  <form class="search-overlay__form" onsubmit="return false;">
+    <label for="searchInput" class="eyebrow">Search</label>
+    <input id="searchInput" type="search" placeholder="Try “cristalino”, “kosher”, “shofar”, “stockists”…" autocomplete="off" />
+    <ul class="search-overlay__results" id="searchResults"></ul>
+  </form>
+</div>
+
+<main>
+
+<!-- ============ HERO SLIDER ============ -->
+<section class="hero" id="home">
+  <div class="hero__bg"><span class="hero__smoke"></span></div>
+  <!-- neck-ribbon nod to the physical bottle label -->
+  <div class="hero__ribbon" aria-hidden="true"><span class="logo"></span></div>
+
+  <button class="hero__arrow hero__arrow--up" data-slide="prev" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg>
+  </button>
+  <button class="hero__arrow hero__arrow--down" data-slide="next" aria-label="Next slide">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+
+  <div class="hero__track" id="heroTrack">
+
+    <article class="hero__slide is-active">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <span class="eyebrow">L'Shana Tova U'Metuka</span>
+          <h1>It will<br /><em>blow</em><br />you away</h1>
+          <a class="btn btn--gold" href="#bottle">
+            Meet the Bottle
+            <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+        </div>
+        <figure class="hero__art shot">
+          <img src="assets/bottle-hero.jpg" alt="Teki'ah Gedolah tequila bottle" class="hero__bottle" />
+        </figure>
+      </div>
+    </article>
+
+    <article class="hero__slide">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <span class="eyebrow">Reposado Cristalino · 100% Agave Azul</span>
+          <h1>Rested in<br />oak. Poured<br /><em>clear</em></h1>
+          <a class="btn btn--gold" href="#bottle">
+            The tasting notes
+            <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+        </div>
+        <figure class="hero__art shot">
+          <img src="assets/bottle-angle.jpg" alt="Teki'ah Gedolah bottle on draped silk" class="hero__bottle" />
+        </figure>
+      </div>
+    </article>
+
+    <article class="hero__slide">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <span class="eyebrow">Teki'ah Gedolah · תקיעה גדולה</span>
+          <h1>One <em>long</em> note<br />to close out<br />the <em>year</em></h1>
+          <a class="btn btn--gold" href="#locator">
+            Find a Bottle
+            <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+          </a>
+        </div>
+        <figure class="hero__art shot">
+          <img src="assets/bottle-trio.jpg" alt="Three bottles of Teki'ah Gedolah" class="hero__bottle" />
+        </figure>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="hero__dots" id="heroDots" role="tablist" aria-label="Hero slides"></div>
+</section>
+
+<!-- ============ HOLIDAY MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>שנה טובה</span><i>✦</i><span>L'Shana Tova</span><i>✦</i><span>100% Agave Azul</span><i>✦</i>
+    <span>תקיעה גדולה</span><i>✦</i><span>Kosher Certified</span><i>✦</i><span>שנה טובה ומתוקה</span><i>✦</i><span>Hecho en México</span><i>✦</i>
+    <span>שנה טובה</span><i>✦</i><span>L'Shana Tova</span><i>✦</i><span>100% Agave Azul</span><i>✦</i>
+    <span>תקיעה גדולה</span><i>✦</i><span>Kosher Certified</span><i>✦</i><span>שנה טובה ומתוקה</span><i>✦</i><span>Hecho en México</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ============ STORY ============ -->
+<section class="intro" id="story">
+  <div class="wrap intro__grid">
+    <figure class="intro__art shot reveal">
+      <img src="assets/bottle-label.jpg" alt="The Teki'ah Gedolah label, showing the shofar" />
+    </figure>
+    <div class="intro__copy reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2 class="display">The name is<br />the whole joke</h2>
+      <p><em>Teki'ah gedolah</em> — תקיעה גדולה — is the last blast of the shofar: one note, held as long as the breath lasts, the sound the whole service has been building toward. Say it out loud and you'll hear the other word hiding in it.</p>
+      <p>So the ram's horn goes on the label, the blessing goes on the box, and the line underneath writes itself: <strong>it will blow you away.</strong></p>
+      <p>Behind the joke is a serious bottle. Teki'ah Gedolah is produced under the El Poderío mark in Tequila, Jalisco, distilled from 100% blue agave, rested in oak and then filtered clear — a cristalino that keeps the rested character and loses the colour. Kosher certified, bottled at 80 proof, each bottle numbered and signed by hand.</p>
+      <ul class="intro__specs">
+        <li><strong>100%</strong><span>Agave Azul</span></li>
+        <li><strong>40%</strong><span>Alc./Vol · 80 proof</span></li>
+        <li><strong>1 L</strong><span>Bottle size</span></li>
+        <li><strong>1438</strong><span>NOM · CRT certified</span></li>
+      </ul>
+      <a class="btn btn--dark" href="#bottle">
+        Read the tasting notes
+        <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE TABLE (band) ============ -->
+<section class="band" id="table">
+  <img src="assets/band-wide.jpg" alt="Teki'ah Gedolah bottle resting on draped silk" class="band__img" />
+  <div class="band__veil"></div>
+  <div class="wrap band__copy reveal">
+    <span class="eyebrow">The Table</span>
+    <h2 class="display">Bring it out when<br />everyone finally sits down</h2>
+    <p>After the apples. Before the brisket. Somewhere around the third round of “so, how's work?”</p>
+    <a class="btn btn--light" href="#ritual">The Ritual</a>
+  </div>
+</section>
+
+<!-- ============ THE BOTTLE ============ -->
+<section class="collection" id="bottle">
+  <div class="wrap collection__head">
+    <span class="eyebrow">The Bottle</span>
+    <h2 class="display">Reposado Cristalino</h2>
+    <p class="collection__sub">1 L · 40% Alc./Vol · 100% Agave Azul · NOM 1438 CRT · Hecho en México</p>
+  </div>
+
+  <div class="collection__stage">
+    <button class="carousel-arrow carousel-arrow--prev" data-product="prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18"/></svg>
+    </button>
+
+    <div class="collection__track" id="productTrack">
+
+      <article class="product is-active" data-index="0">
+        <div class="product__info">
+          <span class="eyebrow">The Nose</span>
+          <h3>Clean, and<br />very green</h3>
+          <p>Cooked agave first — sweet, vegetal, unmistakable — then citrus peel and a little white pepper. The oak sits underneath rather than on top, which is the whole point of a cristalino.</p>
+          <div class="product__buy">
+            <a class="btn btn--gold btn--sm" href="#locator">Find a bottle</a>
+            <span class="product__meta">80 proof</span>
+          </div>
+        </div>
+        <figure class="product__art shot">
+          <img src="assets/bottle-front.jpg" alt="Teki'ah Gedolah, front label" />
+        </figure>
+      </article>
+
+      <article class="product" data-index="1">
+        <div class="product__info">
+          <span class="eyebrow">The Palate</span>
+          <h3>Rested, then<br />filtered clear</h3>
+          <p>Time in oak gives it vanilla and a soft, round middle; the charcoal filtering takes the colour back out. What's left is a reposado that drinks like a blanco and finishes like something older.</p>
+          <div class="product__buy">
+            <a class="btn btn--gold btn--sm" href="#locator">Find a bottle</a>
+            <span class="product__meta">Reposado Cristalino</span>
+          </div>
+        </div>
+        <figure class="product__art shot">
+          <img src="assets/bottle-label.jpg" alt="Teki'ah Gedolah label detail" />
+        </figure>
+      </article>
+
+      <article class="product" data-index="2">
+        <div class="product__info">
+          <span class="eyebrow">The Finish</span>
+          <h3>Held to<br />the last</h3>
+          <p>Warm, dry and long, with roasted agave and a trace of oak smoke well after the glass is down. Given what the bottle is named after, holding the last note is more or less the job.</p>
+          <div class="product__buy">
+            <a class="btn btn--gold btn--sm" href="#locator">Find a bottle</a>
+            <span class="product__meta">Neat, no ice</span>
+          </div>
+        </div>
+        <figure class="product__art shot">
+          <img src="assets/bottle-hero.jpg" alt="Teki'ah Gedolah bottle" />
+        </figure>
+      </article>
+
+      <article class="product" data-index="3">
+        <div class="product__info">
+          <span class="eyebrow">The Back Label</span>
+          <h3>Everything<br />on the record</h3>
+          <p>Produced under the El Poderío mark exclusively for Teki'ah Gedolah, bottled by Destiladora del Valle de Tequila in Tequila, Jalisco, and imported by Helmsman Imports of Austin, Texas. Kosher certified. Every bottle carries its own number and a signature.</p>
+          <div class="product__buy">
+            <a class="btn btn--gold btn--sm" href="#locator">Find a bottle</a>
+            <span class="product__meta">NOM 1438 · D.O.P.</span>
+          </div>
+        </div>
+        <figure class="product__art shot">
+          <img src="assets/bottle-back.jpg" alt="Teki'ah Gedolah back label" />
+        </figure>
+      </article>
+
+    </div>
+
+    <button class="carousel-arrow carousel-arrow--next" data-product="next" aria-label="Next">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+
+  <div class="collection__dots" id="productDots"></div>
+
+  <ul class="badges wrap">
+    <li><strong>Kosher Certified</strong><span>Mark shown on the bottle</span></li>
+    <li><strong>100% Agave</strong><span>Azul, no mixto</span></li>
+    <li><strong>Numbered</strong><span>And signed by hand</span></li>
+    <li><strong>Hecho en México</strong><span>Tequila, Jalisco · D.O.P.</span></li>
+  </ul>
+</section>
+
+<!-- ============ THE RITUAL ============ -->
+<section class="ritual" id="ritual">
+  <div class="wrap">
+    <div class="ritual__head reveal">
+      <span class="eyebrow">The Ritual</span>
+      <h2 class="display">Three ways to pour it</h2>
+      <p>However you serve it, say the blessing first. The tequila will wait.</p>
+    </div>
+
+    <div class="ritual__grid">
+      <article class="ritual__card reveal">
+        <span class="ritual__num">01</span>
+        <h3>Neat, in a glass</h3>
+        <p>Room temperature, no ice, a wide-mouthed glass. A cristalino has nowhere to hide, which is exactly why it's worth drinking this way first.</p>
+        <span class="ritual__meta">2 oz Teki'ah Gedolah</span>
+      </article>
+
+      <article class="ritual__card reveal">
+        <span class="ritual__num">02</span>
+        <h3>The Tishrei</h3>
+        <p>2 oz Teki'ah Gedolah, ¾ oz fresh pomegranate juice, ½ oz lemon, a bar spoon of honey syrup. Shake hard, strain over one large cube, float three pomegranate seeds.</p>
+        <span class="ritual__meta">Our house cocktail</span>
+      </article>
+
+      <article class="ritual__card reveal">
+        <span class="ritual__num">03</span>
+        <h3>Apples &amp; Honey</h3>
+        <p>2 oz Teki'ah Gedolah stirred with ½ oz spiced apple cordial and a dash of orange bitters. Serve up, with a thin slice of honeycrisp across the rim.</p>
+        <span class="ritual__meta">For the new year</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POURED AT ============ -->
+<section class="clients">
+  <div class="wrap clients__grid">
+    <div class="clients__intro reveal">
+      <span class="eyebrow">Poured At</span>
+      <h2 class="display">On the table,<br />and on the list</h2>
+      <p>Carried by the bars, shops and simchas that take both the spirit and the calendar seriously.</p>
+    </div>
+    <ul class="clients__logos reveal">
+      <li>Shulem &amp; Co</li>
+      <li>Tishrei Bar</li>
+      <li>Casa Miel</li>
+      <li>The Round Table</li>
+      <li>Rimon House</li>
+      <li>Elul Wine Co</li>
+      <li>Bar Machar</li>
+      <li>Golden Fig</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHERE TO BUY ============ -->
+<section class="locator" id="locator">
+  <div class="locator__copy">
+    <div class="locator__inner reveal">
+      <span class="eyebrow">Where to Buy</span>
+      <h2 class="display">Find a bottle<br />before the<br />first of Tishrei</h2>
+      <p>Imported into the United States by Helmsman Imports, Austin, Texas. Enter your city to find the nearest shop carrying it.</p>
+      <form class="locator__form" id="locatorForm">
+        <input type="text" name="zip" placeholder="Enter city or ZIP" aria-label="City or ZIP" required />
+        <button class="btn btn--gold btn--sm" type="submit">Find</button>
+      </form>
+      <ul class="locator__list" id="locatorList">
+        <li><strong>Rimon House Wine &amp; Spirits</strong><span>1214 8th Ave, New York, NY 10001 · 0.4 mi</span></li>
+        <li><strong>Elul Wine Co.</strong><span>88 Ludlow St, New York, NY 10002 · 1.1 mi</span></li>
+        <li><strong>The Round Table Bottle Shop</strong><span>402 W 14th St, New York, NY 10014 · 2.3 mi</span></li>
+      </ul>
+      <p class="locator__note">Shop or restaurant? <a href="#contact">Ask about wholesale</a>.</p>
+    </div>
+  </div>
+  <div class="locator__map">
+    <img src="assets/map.jpg" alt="Map of stockist locations" data-slot="map" />
+    <div class="locator__pin"><span></span></div>
+    <div class="locator__card">
+      <strong>Rimon House Wine &amp; Spirits</strong>
+      <span>1214 8th Ave, New York, NY 10001</span>
+      <span class="locator__hours">In stock</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter">
+  <div class="wrap newsletter__inner reveal">
+    <div>
+      <span class="eyebrow">Before the shofar</span>
+      <h2 class="display">Know when the<br />next run lands</h2>
+      <p class="newsletter__note-copy">A couple of emails a year, around the holidays. Nothing else.</p>
+    </div>
+    <form class="newsletter__form" id="newsletterForm">
+      <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required />
+      <button class="btn btn--gold" type="submit">Notify Me</button>
+      <p class="form-note" id="newsletterNote" hidden>Thank you — we'll be in touch before Elul. Shana tova.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <a class="brand brand--footer" href="#home" aria-label="Teki'ah Gedolah — home">
+        <span class="logo" role="img" aria-label="Teki'ah Gedolah"></span>
+        <small class="brand__sub">Tequila</small>
+      </a>
+      <p>The last long blast of the shofar, poured. Reposado Cristalino, 100% agave azul, produced in Tequila, Jalisco under the El Poderío mark and imported by Helmsman Imports, Austin, TX.</p>
+      <p class="footer__hebrew">שנה טובה ומתוקה</p>
+    </div>
+
+    <nav class="footer__links" aria-label="Footer">
+      <h4>Explore</h4>
+      <a href="#bottle">The Bottle</a>
+      <a href="#story">Our Story</a>
+      <a href="#ritual">The Ritual</a>
+      <a href="#table">The Table</a>
+      <a href="#locator">Where to Buy</a>
+    </nav>
+
+    <div class="footer__contact">
+      <h4>Contact</h4>
+      <a href="mailto:shalom@tequilagedolah.com">shalom@tequilagedolah.com</a>
+      <a href="mailto:wholesale@tequilagedolah.com">wholesale@tequilagedolah.com</a>
+      <p>Imported by Helmsman Imports<br />Austin, Texas</p>
+    </div>
+
+    <div class="footer__social">
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="#" aria-label="Instagram">IG</a></li>
+        <li><a href="#" aria-label="Facebook">FB</a></li>
+        <li><a href="#" aria-label="X">X</a></li>
+        <li><a href="#" aria-label="YouTube">YT</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer__bar">
+    <p>© <span id="year"></span> Teki'ah Gedolah. Please drink responsibly. 21+</p>
+    <p><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Accessibility</a></p>
+  </div>
+</footer>
+
+<!-- Cart toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
