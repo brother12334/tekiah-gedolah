@@ -28,21 +28,30 @@ the subject gets a soft key light and unsharp mask while the background is
 blurred, desaturated and darkened, faking shallow depth of field and a seamless
 sweep. Finished with a light S-curve, a green-cast correction and fine grain.
 
+The bottles are then **cut out of the background entirely** (`cutout.py`) using
+rembg's `isnet-general-use` model with alpha matting, so clear glass keeps a
+soft edge instead of a halo. A cleanup pass (`clean_cut.py`) drops the
+near-transparent haze the matting leaves and deletes stray blobs — connected
+components smaller than 14% of the largest — which is what removed the wisp of
+bedsheet floating beside the neck. Saved as **WebP with alpha**: 6.0 MB of PNG
+became 676 KB with no visible loss.
+
 | File | Source | Where it appears |
 |---|---|---|
-| `bottle-hero.jpg` | IMG_0035 | Hero slide 1, and The Finish panel |
-| `bottle-angle.jpg` | IMG_0004 | Hero slide 2 |
-| `bottle-trio.jpg` | IMG_0021 | Hero slide 3 |
-| `bottle-label.jpg` | IMG_0036 | Our Story, and The Palate panel |
-| `bottle-front.jpg` | IMG_0037 | The Nose panel |
-| `bottle-back.jpg` | IMG_0030 | The Back Label panel |
-| `bottle-back-2.jpg` | IMG_0020 | spare — not currently placed |
-| `band-wide.jpg` | IMG_0004 | Full-bleed band ("The Table") |
+| `cut-hero.webp` | IMG_0035 | Hero slide 1, and The Finish panel |
+| `cut-angle.webp` | IMG_0004 | Hero slide 2 |
+| `cut-trio.webp` | IMG_0021 | Hero slide 3 |
+| `cut-label.webp` | IMG_0036 | Our Story (large, inverted), The Palate panel |
+| `cut-front.webp` | IMG_0037 | Our Story (lower left), The Nose panel |
+| `cut-back.webp` | IMG_0030 | Our Story (lower right), The Back Label panel |
+| `band-wide.jpg` | IMG_0004 | Full-bleed band ("The Table") — kept as a photo |
 
-Photos sit in `.shot` — an arch-topped frame echoing the oval on the label,
-with a gold hairline and a vignette that blends the shot into the page. To
-re-crop any of them, edit the `JOBS` table in `retouch.py` and re-run; the
-originals in `Downloads` are untouched.
+Cutouts float on a gold radial glow with a drop shadow, matching the reference
+layout. `band-wide.jpg` is deliberately *not* cut out — a full-bleed section
+wants a real photograph behind the text.
+
+To re-crop or re-cut, edit the `JOBS` table in `retouch.py` / `cutout.py` and
+re-run. The originals in `Downloads` are untouched.
 
 ### Still missing
 
