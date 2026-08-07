@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 210" width="600" height="210">
+  <defs>
+    <linearGradient id="h" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8b552"/>
+      <stop offset="45%" stop-color="#d99b2b"/>
+      <stop offset="100%" stop-color="#b87d18"/>
+    </linearGradient>
+  </defs>
+    <rect x="0" y="0" width="600" height="26" fill="url(#h)"/>
+  <path d="M43.0,24.0 C43.0,64.7 49.3,57.3 49.3,98.0 L66.7,98.0 C66.7,57.3 73.0,64.7 73.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="58" cy="98.0" r="10.8" fill="url(#h)"/>
+  <path d="M51.4,30.0 L53.8,87.2" stroke="rgba(255,236,190,.42)" stroke-width="3.0" stroke-linecap="round" fill="none"/>
+  <path d="M137.0,24.0 C137.0,94.4 141.6,81.6 141.6,152.0 L154.4,152.0 C154.4,81.6 159.0,94.4 159.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="148" cy="152.0" r="7.9" fill="url(#h)"/>
+  <path d="M143.2,30.0 L144.9,144.1" stroke="rgba(255,236,190,.42)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M215.0,24.0 C215.0,50.4 222.1,45.6 222.1,72.0 L241.9,72.0 C241.9,45.6 249.0,50.4 249.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="232" cy="72.0" r="12.2" fill="url(#h)"/>
+  <path d="M224.5,30.0 L227.3,59.8" stroke="rgba(255,236,190,.42)" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+  <path d="M313.0,24.0 C313.0,76.8 316.8,67.2 316.8,120.0 L327.2,120.0 C327.2,67.2 331.0,76.8 331.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="322" cy="120.0" r="6.5" fill="url(#h)"/>
+  <path d="M318.0,30.0 L319.5,113.5" stroke="rgba(255,236,190,.42)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  <path d="M396.0,24.0 C396.0,116.4 401.9,99.6 401.9,192.0 L418.1,192.0 C418.1,99.6 424.0,116.4 424.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="410" cy="192.0" r="10.1" fill="url(#h)"/>
+  <path d="M403.8,30.0 L406.1,181.9" stroke="rgba(255,236,190,.42)" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+  <path d="M482.0,24.0 C482.0,55.9 486.2,50.1 486.2,82.0 L497.8,82.0 C497.8,50.1 502.0,55.9 502.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="492" cy="82.0" r="7.2" fill="url(#h)"/>
+  <path d="M487.6,30.0 L489.2,74.8" stroke="rgba(255,236,190,.42)" stroke-width="2.0" stroke-linecap="round" fill="none"/>
+  <path d="M553.0,24.0 C553.0,85.6 558.5,74.4 558.5,136.0 L573.5,136.0 C573.5,74.4 579.0,85.6 579.0,24.0 Z" fill="url(#h)"/>
+  <circle cx="566" cy="136.0" r="9.3" fill="url(#h)"/>
+  <path d="M560.3,30.0 L562.4,126.7" stroke="rgba(255,236,190,.42)" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+</svg>

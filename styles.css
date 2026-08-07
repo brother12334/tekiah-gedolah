@@ -350,6 +350,45 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   transform:translate(-50%,-50%) rotate(90deg);
 }
 
+/* ---------- Honey running over the top of the page ---------- */
+.honey{
+  position:absolute;
+  top:var(--header-h); left:0; right:0;
+  height:230px;
+  z-index:3;
+  pointer-events:none;
+}
+.honey__sheet{
+  position:absolute; inset:0;
+  background:url("assets/honey-drip.svg") repeat-x top center;
+  background-size:600px 210px;
+  filter:drop-shadow(0 6px 14px rgba(120,78,12,.45));
+  transform-origin:top center;
+  animation:ooze 9s ease-in-out infinite;
+}
+@keyframes ooze{
+  0%,100%{ transform:scaleY(1); }
+  50%    { transform:scaleY(1.045); }
+}
+/* droplets that let go and fall */
+.honey__drop{
+  position:absolute;
+  width:13px; height:16px;
+  border-radius:50% 50% 46% 46% / 62% 62% 38% 38%;
+  background:linear-gradient(180deg, #e8b552, #b87d18);
+  box-shadow:0 3px 8px rgba(120,78,12,.4);
+  opacity:0;
+}
+.honey__drop--a{ left:24%; animation:fall 7s ease-in 1.2s infinite; }
+.honey__drop--b{ left:63%; animation:fall 9s ease-in 4s   infinite; }
+.honey__drop--c{ left:84%; animation:fall 8s ease-in 6.5s infinite; }
+@keyframes fall{
+  0%      { top:150px; opacity:0; transform:scaleY(.7); }
+  8%      { opacity:1; }
+  75%     { opacity:1; }
+  100%    { top:78svh; opacity:0; transform:scaleY(1.7); }
+}
+
 .hero__track{ position:relative; width:100%; z-index:2; }
 .hero__slide{
   position:absolute; inset:0;
@@ -653,63 +692,61 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   border-top:1px solid rgba(27,27,30,.08);
 }
 
-/* ---- the Hava TeKI'lah pitcher: full-width feature card ---- */
+/* ---- the Hava TeKI'lah pitcher: the box sits inside a spinning star ---- */
 .ritual__card--feature{
-  --accent:var(--pom);
   grid-column:1 / -1;
-  margin-top:.6rem;
-  padding:2.8rem clamp(2rem,5vw,3.4rem) 2.4rem;
-  border-top-width:3px;
-  background:
-    radial-gradient(120% 140% at 100% 0%, rgba(201,139,33,.10), transparent 55%),
-    radial-gradient(100% 120% at 0% 100%, rgba(142,34,51,.09), transparent 55%),
-    #fff;
-}
-.ritual__card--feature{
-  grid-template-columns:auto 1fr;
-  gap:clamp(1.5rem,4vw,3.4rem);
-  align-items:center;
-}
-.ritual__recipe{ display:grid; gap:.9rem; align-content:start; }
-.ritual__card--feature .ritual__num{ font-size:3.2rem; }
-
-/* ---- spinning starburst holding the cocktail's name ---- */
-.starmark{
   position:relative;
-  display:grid; place-items:center;
-  width:clamp(190px, 21vw, 260px);
+  display:grid;
+  place-items:center;
+  background:none;
+  border:0;
+  box-shadow:none;
+  padding:clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 7vw, 5rem);
+  overflow:visible;
+}
+.ritual__card--feature:hover{ transform:none; box-shadow:none; }
+
+/* the star: bigger than the box, so its points radiate out around it */
+.starmark{
+  position:absolute;
+  top:50%; left:50%;
+  width:min(96vw, 780px);
   aspect-ratio:1;
-  align-self:center;
+  z-index:0;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  animation:starspin 34s linear infinite;
+  will-change:transform;
 }
-.starmark__spin{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  animation:starspin 22s linear infinite;
-  filter:drop-shadow(0 10px 22px rgba(142,34,51,.28));
-}
-.starmark__spin polygon{ fill:var(--pom); }
+.starmark polygon{ fill:url(#starGrad); }
 .starmark__ring{
   fill:none;
-  stroke:var(--honey-lit);
-  stroke-width:1.5;
-  stroke-dasharray:5 7;
-  opacity:.85;
+  stroke:rgba(255,241,214,.5);
+  stroke-width:.7;
+  stroke-dasharray:2.4 4.2;
 }
-@keyframes starspin{ to{ transform:rotate(360deg); } }
+/* keep the centring translate while rotating, or it flies off-centre */
+@keyframes starspin{
+  from{ transform:translate(-50%,-50%) rotate(0deg); }
+  to  { transform:translate(-50%,-50%) rotate(360deg); }
+}
 
-/* the label stays upright while the star turns underneath it */
-.starmark__label{
-  position:relative; z-index:1;
-  font-family:var(--f-display);
-  font-size:clamp(1.15rem, 2.1vw, 1.5rem);
-  line-height:1.15;
-  text-align:center;
-  color:var(--bone);
-  text-transform:uppercase;
-  letter-spacing:.04em;
-  text-shadow:0 2px 10px rgba(60,10,18,.55);
+.ritual__recipe{
+  position:relative;
+  z-index:1;
+  width:min(92%, 460px);
+  background:#fff;
+  padding:2.4rem clamp(1.5rem,4vw,2.3rem) 2rem;
+  border-top:3px solid var(--honey);
+  box-shadow:0 30px 70px rgba(27,27,30,.26);
+  display:grid; gap:.85rem; align-content:start;
 }
-.starmark__label span{ color:var(--honey-lit); }
+.ritual__recipe h3{
+  font-family:var(--f-display);
+  font-size:clamp(1.8rem,3vw,2.4rem);
+  line-height:1.05;
+}
+.ritual__recipe .ritual__num{ font-size:2.8rem; color:var(--honey); opacity:.32; }
 .ritual__lede{
   font-family:var(--f-serif);
   font-size:1.35rem !important;
@@ -717,7 +754,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   color:var(--text) !important;
   max-width:44ch;
 }
-.ritual__card--feature p{ max-width:70ch; }
+.ritual__recipe p{ max-width:60ch; }
 .ritual__card--feature strong{ color:var(--text); font-weight:500; }
 
 /* ---- honey / pomegranate ingredient chips ---- */
@@ -917,9 +954,11 @@ img.img-missing{
   .intro__copy{ order:1; }
   .clients__logos{ grid-template-columns:repeat(2,1fr); }
   .ritual__grid{ grid-template-columns:1fr; }
-  .ritual__card--feature{ margin-top:0; grid-template-columns:1fr; justify-items:center; }
-  .ritual__recipe{ justify-items:start; }
-  .ritual__lede{ font-size:1.2rem !important; }
+  .ritual__card--feature{ padding-block:clamp(3rem,14vw,5rem) 2.5rem; }
+  .starmark{ width:min(122vw, 560px); }
+  .ritual__lede{ font-size:1.15rem !important; }
+  .honey{ height:170px; }
+  .honey__sheet{ background-size:420px 150px; }
   .badges{ grid-template-columns:repeat(2,1fr); }
   .badges li:nth-child(2n){ border-right:0; }
   .badges li:nth-child(-n+2){ border-bottom:1px solid rgba(246,241,231,.14); }
