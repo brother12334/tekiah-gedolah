@@ -235,6 +235,164 @@
     img.addEventListener('error', flag);
   });
 
+  /* ============================================================
+     Motion
+     Classes are attached here rather than in the markup so the HTML
+     stays readable and the whole system can be disabled in one place.
+     ============================================================ */
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduced) {
+
+    /* ---- split headings into words for staggered reveals ---- */
+    const splitWords = (el) => {
+      let i = 0;
+      const walk = (node) => {
+        Array.from(node.childNodes).forEach((child) => {
+          if (child.nodeType === 3) {
+            const words = child.textContent.split(/(\s+)/);
+            if (!child.textContent.trim()) return;
+            const frag = document.createDocumentFragment();
+            words.forEach((word) => {
+              if (!word.trim()) { frag.appendChild(document.createTextNode(word)); return; }
+              const outer = document.createElement('span');
+              outer.className = 'w';
+              const inner = document.createElement('span');
+              inner.className = 'w__i';
+              inner.style.setProperty('--i', i++);
+              inner.textContent = word;
+              outer.appendChild(inner);
+              frag.appendChild(outer);
+            });
+            child.replaceWith(frag);
+          } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+            walk(child);
+          }
+        });
+      };
+      walk(el);
+      el.classList.add('split');
+    };
+
+    $$('h1, h2.display').forEach(splitWords);
+
+    /* headings observe themselves, so they don't depend on a .reveal parent */
+    const splitIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        splitIO.unobserve(e.target);
+      });
+    }, { threshold: 0.2 });
+    $$('.split').forEach((el) => {
+      // hero headings fire with their slide instead of on scroll
+      if (el.closest('.hero__slide')) el.classList.add('is-in');
+      else splitIO.observe(el);
+    });
+
+    /* ---- the three story bottles fade in one after another ----
+       Opacity only: each float carries its own rotate() and a transform-based
+       reveal would overwrite it. */
+    $$('.intro__art .float').forEach((el, i) => el.style.setProperty('--i', i));
+
+    /* ---- staggered groups ---- */
+    $$('.clients__logos, .badges, .intro__specs, .ritual__accents').forEach((list) => {
+      list.classList.add('reveal', 'stagger');
+      Array.from(list.children).forEach((c, i) => c.style.setProperty('--i', i));
+    });
+
+    /* re-observe anything we just marked as revealable */
+    $$('.reveal:not(.is-in)').forEach((el) => io.observe(el));
+
+    /* ---- count the spec numbers up ---- */
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        countIO.unobserve(el);
+        const raw = el.textContent.trim();
+        const match = raw.match(/^([\d.,]+)(.*)$/);
+        if (!match) return;
+        const target = parseFloat(match[1].replace(/,/g, ''));
+        const suffix = match[2];
+        const decimals = (match[1].split('.')[1] || '').length;
+        const started = performance.now();
+        const dur = 1400;
+        const tick = (now) => {
+          const p = Math.min((now - started) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = (target * eased).toFixed(decimals);
+          // no thousands grouping — one of these is a NOM number, not a quantity
+          el.textContent = (decimals ? val : String(Math.round(val))) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    $$('.intro__specs strong').forEach((el) => countIO.observe(el));
+
+    /* ---- cursor spotlight on the dark sections ---- */
+    $$('.collection, .newsletter, .site-footer').forEach((sec) => {
+      sec.classList.add('spot');
+      sec.addEventListener('pointermove', (e) => {
+        const r = sec.getBoundingClientRect();
+        sec.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        sec.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+
+    /* ---- 3D tilt on the cocktail cards ---- */
+    $$('.ritual__card:not(.ritual__card--feature)').forEach((card) => {
+      card.classList.add('tilt');
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.setProperty('--ry', `${px * 7}deg`);
+        card.style.setProperty('--rx', `${-py * 7}deg`);
+        card.style.setProperty('--lift', '-6px');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--ry', '0deg');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--lift', '0px');
+      });
+    });
+
+    /* ---- magnetic gold buttons ---- */
+    $$('.btn--gold').forEach((btn) => {
+      btn.classList.add('magnetic');
+      btn.addEventListener('pointermove', (e) => {
+        const r = btn.getBoundingClientRect();
+        btn.style.setProperty('--mx', `${((e.clientX - r.left) / r.width - 0.5) * 14}px`);
+        btn.style.setProperty('--my', `${((e.clientY - r.top) / r.height - 0.5) * 10}px`);
+      });
+      btn.addEventListener('pointerleave', () => {
+        btn.style.setProperty('--mx', '0px');
+        btn.style.setProperty('--my', '0px');
+      });
+    });
+
+    /* ---- parallax on the full-bleed band ---- */
+    const bandImg = $('.band__img');
+    if (bandImg) {
+      bandImg.style.willChange = 'transform';
+      let ticking = false;
+      const parallax = () => {
+        const r = bandImg.parentElement.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < window.innerHeight) {
+          const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+          bandImg.style.transform = `translate3d(0, ${progress * -60}px, 0) scale(1.14)`;
+        }
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(parallax); }
+      }, { passive: true });
+      parallax();
+    }
+  }
+
   /* ---------- Footer year ------------------------------- */
   $('#year').textContent = new Date().getFullYear();
 })();

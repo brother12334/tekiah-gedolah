@@ -381,7 +381,8 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   margin-bottom:2.6rem;
 }
 .hero__copy h1 em{ font-style:normal; color:var(--gold); }
-.hero__slide.is-active .hero__copy > *{ animation:riseIn .9s var(--ease) backwards; }
+/* h1 is animated word-by-word instead, so it opts out of the block rise */
+.hero__slide.is-active .hero__copy > *:not(h1){ animation:riseIn .9s var(--ease) backwards; }
 .hero__slide.is-active .hero__copy > *:nth-child(1){ animation-delay:.1s; }
 .hero__slide.is-active .hero__copy > *:nth-child(2){ animation-delay:.22s; }
 .hero__slide.is-active .hero__copy > *:nth-child(3){ animation-delay:.36s; }
@@ -463,9 +464,18 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   filter:drop-shadow(0 26px 34px rgba(27,27,30,.28));
   animation:floaty 8s ease-in-out infinite;
 }
-.float--a{ width:52%; top:-2%;   left:26%;  transform:rotate(164deg); }
-.float--b{ width:34%; bottom:4%; left:-2%;  transform:rotate(-22deg); animation-delay:1.1s; }
-.float--c{ width:31%; bottom:-1%; right:2%; transform:rotate(17deg);  animation-delay:2.2s; }
+/* tall cut-outs: size by height so they can't overflow the block */
+.float--a{ height:96%; width:auto; top:2%;    left:30%;  transform:rotate(164deg); }
+.float--b{ height:62%; width:auto; bottom:2%; left:2%;   transform:rotate(-22deg); animation-delay:1.1s; }
+.float--c{ height:56%; width:auto; bottom:0;  right:4%;  transform:rotate(17deg);  animation-delay:2.2s; }
+
+/* staggered fade, composed so it never clobbers the rotation above */
+.intro__art .float{
+  opacity:0;
+  transition:opacity .9s var(--ease);
+  transition-delay:calc(var(--i, 0) * 160ms);
+}
+.intro__art.is-in .float{ opacity:1; }
 
 .intro__copy h2{ margin-bottom:1.4rem; text-transform:uppercase; }
 .intro__copy p{ color:var(--muted); max-width:46ch; }
@@ -863,6 +873,166 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   transition:transform .5s var(--ease);
 }
 .toast.is-visible{ transform:translate(-50%,0); }
+
+/* ============================================================
+   Motion system
+   Everything below animates transform / opacity / clip-path only,
+   so it stays on the compositor. The global prefers-reduced-motion
+   block at the bottom of this file switches all of it off.
+   ============================================================ */
+
+/* ---- word-by-word heading reveal (JS wraps words in .w > .w__i) ---- */
+.w{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.06em; }
+.w__i{
+  display:inline-block;
+  transform:translateY(115%) rotate(3deg);
+  transition:transform 1s var(--ease);
+  transition-delay:calc(var(--i, 0) * 42ms);
+}
+.split.is-in .w__i{ transform:none; }
+
+/* Note: a clip-path reveal is deliberately NOT used on observed elements —
+   collapsing the box to zero height makes IntersectionObserver report ratio 0,
+   so the class that would re-open it never fires. Opacity/transform only. */
+
+/* ---- staggered children ---- */
+.stagger > *{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+  transition-delay:calc(var(--i, 0) * 70ms);
+}
+.stagger.is-in > *{ opacity:1; transform:none; }
+
+/* ---- shine sweep across gold buttons ---- */
+.btn--gold{ position:relative; overflow:hidden; isolation:isolate; }
+.btn--gold::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.55) 48%, transparent 66%);
+  transform:translateX(-120%);
+  transition:transform .85s var(--ease);
+  z-index:-1;
+}
+.btn--gold:hover::after{ transform:translateX(120%); }
+
+/* ---- magnetic buttons (JS sets --mx/--my) ---- */
+.magnetic{ transition:transform .35s var(--ease); }
+.magnetic:hover{ transform:translate(var(--mx, 0), var(--my, 0)) translateY(-2px); }
+
+/* ---- rotating seal: circular text, like the star ---- */
+.seal{
+  position:absolute;
+  right:clamp(1rem, 4vw, 3.5rem);
+  bottom:clamp(1rem, 5vh, 3.5rem);
+  width:clamp(96px, 11vw, 148px);
+  aspect-ratio:1;
+  z-index:6;
+  display:grid; place-items:center;
+  pointer-events:none;
+}
+.seal__ring{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  animation:sealspin 22s linear infinite;
+}
+.seal__ring text{
+  font-family:var(--f-body);
+  font-size:11.4px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  fill:var(--gold);
+}
+@keyframes sealspin{ to{ transform:rotate(360deg); } }
+.seal__core{
+  width:34%; aspect-ratio:1; border-radius:50%;
+  border:1px solid rgba(231,201,143,.5);
+  display:grid; place-items:center;
+  color:var(--gold); font-size:.62rem; letter-spacing:.14em;
+  animation:corepulse 3.4s ease-in-out infinite;
+}
+@keyframes corepulse{
+  0%,100%{ transform:scale(1);    opacity:.85; }
+  50%    { transform:scale(1.12); opacity:1; }
+}
+
+/* ---- the blast: rings pushing out from the bottle ---- */
+.blast{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  pointer-events:none; z-index:0;
+}
+.blast i{
+  position:absolute;
+  width:46%; aspect-ratio:1;
+  border-radius:50%;
+  border:1px solid rgba(231,201,143,.42);
+  transform:scale(.35);
+  opacity:0;
+  animation:blastout 5.4s cubic-bezier(.2,.7,.35,1) infinite;
+}
+.blast i:nth-child(2){ animation-delay:1.8s; }
+.blast i:nth-child(3){ animation-delay:3.6s; }
+@keyframes blastout{
+  0%  { transform:scale(.35); opacity:0; }
+  12% { opacity:.75; }
+  100%{ transform:scale(2.1); opacity:0; }
+}
+
+/* ---- cursor spotlight on the dark sections (JS sets --mx/--my) ---- */
+.spot{ position:relative; isolation:isolate; }
+.spot::before{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(340px circle at var(--mx, 50%) var(--my, 50%),
+             rgba(231,201,143,.10), transparent 70%);
+  opacity:0;
+  transition:opacity .5s var(--ease);
+  pointer-events:none;
+  z-index:0;
+}
+.spot:hover::before{ opacity:1; }
+
+/* ---- 3D tilt on the ritual cards (JS sets --rx/--ry) ---- */
+.tilt{
+  transform:perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0));
+  transition:transform .4s var(--ease);
+  transform-style:preserve-3d;
+}
+
+/* ---- carousel panels arrive with a little depth ---- */
+.product{
+  transform:translateY(24px) scale(.97);
+}
+.product.is-active{ transform:none; }
+.product__art{ transition:transform 1s var(--ease); }
+.product.is-active .product__art{ animation:platein 1s var(--ease); }
+@keyframes platein{
+  from{ transform:translateY(28px) rotate(-1.5deg); opacity:0; }
+  to  { transform:none; opacity:1; }
+}
+
+/* ---- underline that draws in on nav + footer links ---- */
+.footer__links a, .footer__contact a{
+  position:relative; display:inline-block; width:fit-content;
+}
+.footer__links a::after, .footer__contact a::after{
+  content:""; position:absolute; left:0; bottom:-2px;
+  width:100%; height:1px; background:var(--gold);
+  transform:scaleX(0); transform-origin:right;
+  transition:transform .45s var(--ease);
+}
+.footer__links a:hover::after, .footer__contact a:hover::after{
+  transform:scaleX(1); transform-origin:left;
+}
+
+/* ---- clients grid: tiles flip up on hover ---- */
+.clients__logos li{ transition:color .35s var(--ease), background .35s var(--ease), transform .45s var(--ease); }
+.clients__logos li:hover{ transform:translateY(-4px); }
+
+/* ---- badges lift ---- */
+.badges li{ transition:transform .45s var(--ease), color .45s var(--ease); }
+.badges li:hover{ transform:translateY(-5px); }
 
 /* ============================================================
    Scroll reveal
