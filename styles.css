@@ -350,45 +350,6 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   transform:translate(-50%,-50%) rotate(90deg);
 }
 
-/* ---------- Honey running over the top of the page ---------- */
-.honey{
-  position:absolute;
-  top:var(--header-h); left:0; right:0;
-  height:230px;
-  z-index:3;
-  pointer-events:none;
-}
-.honey__sheet{
-  position:absolute; inset:0;
-  background:url("assets/honey-drip.svg") repeat-x top center;
-  background-size:600px 210px;
-  filter:drop-shadow(0 6px 14px rgba(120,78,12,.45));
-  transform-origin:top center;
-  animation:ooze 9s ease-in-out infinite;
-}
-@keyframes ooze{
-  0%,100%{ transform:scaleY(1); }
-  50%    { transform:scaleY(1.045); }
-}
-/* droplets that let go and fall */
-.honey__drop{
-  position:absolute;
-  width:13px; height:16px;
-  border-radius:50% 50% 46% 46% / 62% 62% 38% 38%;
-  background:linear-gradient(180deg, #e8b552, #b87d18);
-  box-shadow:0 3px 8px rgba(120,78,12,.4);
-  opacity:0;
-}
-.honey__drop--a{ left:24%; animation:fall 7s ease-in 1.2s infinite; }
-.honey__drop--b{ left:63%; animation:fall 9s ease-in 4s   infinite; }
-.honey__drop--c{ left:84%; animation:fall 8s ease-in 6.5s infinite; }
-@keyframes fall{
-  0%      { top:150px; opacity:0; transform:scaleY(.7); }
-  8%      { opacity:1; }
-  75%     { opacity:1; }
-  100%    { top:78svh; opacity:0; transform:scaleY(1.7); }
-}
-
 .hero__track{ position:relative; width:100%; z-index:2; }
 .hero__slide{
   position:absolute; inset:0;
@@ -957,8 +918,6 @@ img.img-missing{
   .ritual__card--feature{ padding-block:clamp(3rem,14vw,5rem) 2.5rem; }
   .starmark{ width:min(122vw, 560px); }
   .ritual__lede{ font-size:1.15rem !important; }
-  .honey{ height:170px; }
-  .honey__sheet{ background-size:420px 150px; }
   .badges{ grid-template-columns:repeat(2,1fr); }
   .badges li:nth-child(2n){ border-right:0; }
   .badges li:nth-child(-n+2){ border-bottom:1px solid rgba(246,241,231,.14); }
