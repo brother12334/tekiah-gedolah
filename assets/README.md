@@ -21,46 +21,36 @@ caps. Swap `--f-display` in `styles.css` if you know the real typeface.
 
 ## Photography
 
-The seven phone shots were retouched into product plates by
-`scratchpad/retouch.py`. Per image: EXIF orientation, gray-world white balance
-(the sheets threw a heavy blue-green cast), crop, then a "studio relight" —
-the subject gets a soft key light and unsharp mask while the background is
-blurred, desaturated and darkened, faking shallow depth of field and a seamless
-sweep. Finished with a light S-curve, a green-cast correction and fine grain.
-
-The bottles are then **cut out of the background entirely** (`cutout.py`) using
-rembg's `isnet-general-use` model with alpha matting, so clear glass keeps a
-soft edge instead of a halo. A cleanup pass (`clean_cut.py`) drops the
-near-transparent haze the matting leaves and deletes stray blobs — connected
-components smaller than 14% of the largest — which is what removed the wisp of
-bedsheet floating beside the neck. Saved as **WebP with alpha**: 6.0 MB of PNG
-became 676 KB with no visible loss.
+Two cut-outs, from the lightbox shoot. That is the whole set.
 
 | File | Source | Where it appears |
 |---|---|---|
-| `cut-hero.webp` | IMG_0035 | Hero slide 1, and The Finish panel |
-| `cut-angle.webp` | IMG_0004 | Hero slide 2 |
-| `cut-trio.webp` | IMG_0021 | Hero slide 3 |
-| `cut-label.webp` | IMG_0036 | Our Story (large, inverted), The Palate panel |
-| `cut-front.webp` | IMG_0037 | Our Story (lower left), The Nose panel |
-| `cut-back.webp` | IMG_0030 | Our Story (lower right), The Back Label panel |
-| `band-wide.jpg` | IMG_0004 | Full-bleed band ("The Table") — kept as a photo |
+| `cut-front.webp` | DSC_0074 | Hero, and The Bottle panels 1-3 |
+| `cut-back.webp` | DSC_0080 | The Bottle, Back Label panel only |
 
-Cutouts float on a gold radial glow with a drop shadow, matching the reference
-layout. `band-wide.jpg` is deliberately *not* cut out — a full-bleed section
-wants a real photograph behind the text.
+`cutout.py` / `shoot2.py` in the scratchpad do the work: grade the frame (the
+shoot is deliberately underexposed to protect the label), black out everything
+outside the bottle's centre column above the shoulder — otherwise the neck
+reads as background against the lightbox's top strip and the cap gets cut off —
+then rembg with alpha matting, largest-blob cleanup, and trim to the alpha box.
 
-To re-crop or re-cut, edit the `JOBS` table in `retouch.py` / `cutout.py` and
-re-run. The originals in `Downloads` are untouched.
+Photography was deliberately cut back. The hero was a three-slide carousel, the
+story had floating bottles, and the band ran a full-bleed frame of the lightbox
+interior. All removed: the shoot is not strong enough to carry that much
+surface, and the site reads better with the bottle appearing twice, well, than
+six times, thinly. The band and story are typographic now.
+
+`grain.svg` is a single fine noise plate over the page at 5.5% — enough to stop
+large dark areas banding, not enough to read as texture.
 
 ### Still missing
 
-`map.jpg` — the Where to Buy panel. Drop in a map screenshot (1400×1000), or
+`map.jpg` — the Where to Buy panel. Drop in a map screenshot (1400x1000), or
 replace the `<img>` inside `.locator__map` with a Google Maps `<iframe>` and
-delete `.locator__pin`. Until then it renders as a dashed placeholder.
+delete `.locator__pin`.
 
-Worth shooting when you can: a pour in a glass, and a bottle on an actual
-holiday table. Both would replace stock-feeling sections with real ones.
+Worth shooting when there is time: the glass shofar shot glass that ships with
+every bottle, and a pour. Those would earn their own sections.
 
 ## Facts taken from the bottle — and what is still invented
 

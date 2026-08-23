@@ -117,7 +117,9 @@
   let heroIdx  = 0;
   let heroTimer;
 
-  slides.forEach((_, i) => {
+  const heroIsSlider = slides.length > 1;
+
+  if (heroIsSlider) slides.forEach((_, i) => {
     const b = document.createElement('button');
     b.setAttribute('role', 'tab');
     b.setAttribute('aria-label', `Slide ${i + 1}`);
@@ -133,13 +135,14 @@
     restartHero();
   }
   function restartHero() {
+    if (!heroIsSlider) return;
     clearInterval(heroTimer);
     heroTimer = setInterval(() => goHero(heroIdx + 1), 7000);
   }
   $$('[data-slide]').forEach(btn =>
     btn.addEventListener('click', () => goHero(heroIdx + (btn.dataset.slide === 'next' ? 1 : -1)))
   );
-  restartHero();
+  if (heroIsSlider) restartHero();
 
   /* ---------- Product carousel -------------------------- */
   const products = $$('.product');
@@ -314,7 +317,7 @@
     /* ---- the three story bottles fade in one after another ----
        Opacity only: each float carries its own rotate() and a transform-based
        reveal would overwrite it. */
-    $$('.intro__art .float').forEach((el, i) => el.style.setProperty('--i', i));
+    $$('.intro__art .float').forEach((el, i) => el.style.setProperty('--i', i));  // no-op if the story has no art
 
     /* ---- staggered groups ---- */
     $$('.clients__logos, .badges, .intro__specs, .ritual__accents').forEach((list) => {
