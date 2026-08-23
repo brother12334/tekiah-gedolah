@@ -153,10 +153,31 @@
     b.addEventListener('click', () => goProduct(i));
     pDots.appendChild(b);
   });
+  /* The bottle stands still while the notes rotate — it only changes when the
+     panel is actually about a different face of the bottle. */
+  const bottleImg = $('#bottleArtImg');
+  const FACES = {
+    3: { src: 'assets/cut-back.webp',  alt: "Teki'lah Gedolah, back label" }
+  };
+  const DEFAULT_FACE = { src: 'assets/cut-front.webp', alt: "Teki'lah Gedolah, front label" };
+
+  function setFace(i) {
+    if (!bottleImg) return;
+    const face = FACES[i] || DEFAULT_FACE;
+    if (bottleImg.getAttribute('src') === face.src) return;
+    bottleImg.classList.add('is-swapping');
+    setTimeout(() => {
+      bottleImg.src = face.src;
+      bottleImg.alt = face.alt;
+      bottleImg.classList.remove('is-swapping');
+    }, 400);
+  }
+
   function goProduct(i) {
     pIdx = (i + products.length) % products.length;
     products.forEach((p, n) => p.classList.toggle('is-active', n === pIdx));
     $$('button', pDots).forEach((d, n) => d.classList.toggle('is-active', n === pIdx));
+    setFace(pIdx);
   }
   $$('[data-product]').forEach(btn =>
     btn.addEventListener('click', () => goProduct(pIdx + (btn.dataset.product === 'next' ? 1 : -1)))
