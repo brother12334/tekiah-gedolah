@@ -4,29 +4,33 @@
    ============================================================ */
 
 :root{
-  /* Stone + charcoal, tuned to the black-and-white letterpress label.
-     Everything is desaturated on purpose — the grain layer does the rest. */
-  --ink:      #101113;   /* charcoal, slightly cool */
-  --ink-2:    #17181b;
-  --bone:     #e7e4dd;   /* grey paper, not cream */
-  --bone-2:   #dbd7ce;
-  --gold:     #c3b393;   /* aged brass, matte */
-  --gold-2:   #d2c4a6;
-  --gold-deep:#8d7f64;
-  --text:     #1c1d1f;
-  --muted:    #74736e;
-  --muted-d:  rgba(231,228,221,.60);
-  --pom:      #7a333a;   /* dried pomegranate */
-  --pom-lit:  #a05149;
-  --honey:    #a58a51;   /* dark honey, matte */
-  --honey-lit:#c4a86b;
-
-  --f-display: "Cinzel", "Cormorant Garamond", Georgia, serif;
-  --f-serif:   "Cormorant Garamond", Georgia, serif;
-  --f-body:    "Jost", "Helvetica Neue", Arial, sans-serif;
+  /* Dark walnut and matte brass. Every surface is dark now; the wood grain
+     and film grain textures do the work the flat colours used to. */
+  --ink:      #100c09;   /* deepest — hero, footer */
+  --ink-2:    #171109;
+  --wood:     #241a12;   /* board */
+  --wood-2:   #2c2016;   /* second board, one shade up */
+  --wood-3:   #37281c;   /* raised: cards, inputs, list rows */
+  --bone:     #ece4d6;   /* warm off-white — this is TEXT now, not a surface */
+  --bone-2:   #2c2016;   /* legacy surface name, now a board tone */
+  --gold:     #c8b391;
+  --gold-2:   #dbcaa8;
+  --gold-deep:#a08f6d;
+  --text:     #ece4d6;
+  --muted:    #a08f79;
+  --muted-d:  rgba(236,228,214,.62);
+  --pom:      #8c3a3a;
+  --pom-lit:  #b45a4c;
+  --pom-text: #d98c78;   /* pomegranate legible on walnut */
+  --honey:    #bf9550;
+  --honey-lit:#d9b878;
+  --line:     rgba(236,228,214,.13);
 
   --logo:      url("assets/logo-wordmark.svg");
   --logo-ratio: 229 / 17.8;
+  --f-display: "Cinzel", "Cormorant Garamond", Georgia, serif;
+  --f-serif:   "Cormorant Garamond", Georgia, serif;
+  --f-body:    "Jost", "Helvetica Neue", Arial, sans-serif;
   --wrap: 1240px;
   --header-h: 84px;
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -39,7 +43,7 @@ html{ scroll-behavior:smooth; scroll-padding-top:var(--header-h); }
 
 body{
   margin:0;
-  background:var(--bone);
+  background:var(--wood);
   color:var(--text);
   font-family:var(--f-body);
   font-size:16px;
@@ -143,7 +147,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
 .btn--sm{ padding:.7rem 1.3rem; font-size:.72rem; }
 .btn--gold:hover{ --btn-bg:var(--gold-2); }
 .btn--dark{ --btn-bg:transparent; --btn-fg:var(--text); border-color:rgba(27,27,30,.35); }
-.btn--dark:hover{ --btn-bg:var(--ink); --btn-fg:var(--bone); }
+.btn--dark:hover{ --btn-bg:var(--gold); --btn-fg:#241a12; }
 .btn--light{ --btn-bg:var(--bone); --btn-fg:var(--ink); }
 .btn--ghost{ --btn-bg:transparent; --btn-fg:var(--bone); border-color:rgba(231,228,221,.3); }
 
@@ -454,7 +458,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
 /* ============================================================
    Intro
    ============================================================ */
-.intro{ background:var(--bone); padding:clamp(4rem,9vw,8rem) 0; overflow:hidden; }
+.intro{ background:var(--wood); padding:clamp(4rem,9vw,8rem) 0; overflow:hidden; }
 .intro__grid{
   display:grid; grid-template-columns:1fr 1fr;
   gap:clamp(2rem,6vw,5rem); align-items:center;
@@ -463,7 +467,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
 .intro__art{ position:relative; min-height:min(76vh, 620px); margin:0; }
 .float{
   position:absolute;
-  filter:drop-shadow(0 26px 34px rgba(27,27,30,.28));
+  filter:drop-shadow(0 26px 34px var(--line));
   animation:floaty 8s ease-in-out infinite;
 }
 /* tall cut-outs: size by height so they can't overflow the block */
@@ -507,7 +511,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
 /* ============================================================
    Clients
    ============================================================ */
-.clients{ background:var(--bone-2); padding:clamp(3.5rem,8vw,6.5rem) 0; }
+.clients{ background:var(--wood-2); padding:clamp(3.5rem,8vw,6.5rem) 0; }
 .clients__grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
 .clients__intro h2{ text-transform:uppercase; margin-bottom:1rem; }
 .clients__intro p{ color:var(--muted); max-width:38ch; }
@@ -523,7 +527,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   color:rgba(27,27,30,.42);
   transition:color .35s var(--ease), background .35s var(--ease);
 }
-.clients__logos li:hover{ color:var(--text); background:rgba(255,255,255,.5); }
+.clients__logos li:hover{ color:var(--gold); background:rgba(236,228,214,.05); }
 
 /* ============================================================
    Collection carousel
@@ -643,7 +647,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   background:
     radial-gradient(80% 55% at 88% 4%, rgba(201,139,33,.13), transparent 60%),
     radial-gradient(70% 50% at 6% 96%, rgba(142,34,51,.10), transparent 60%),
-    linear-gradient(180deg, var(--bone-2), var(--bone));
+    linear-gradient(180deg, var(--wood-2), var(--wood));
   padding:clamp(4rem,9vw,7rem) 0;
 }
 .ritual__head{ text-align:center; max-width:56ch; margin:0 auto clamp(2.5rem,5vw,3.5rem); }
@@ -656,27 +660,27 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   align-items:start;
 }
 .ritual__card{
-  position:relative; background:#fff;
+  position:relative; background:var(--wood-3);
   padding:2.4rem 2rem 2rem;
   border-top:2px solid var(--accent, var(--pom));
   display:grid; align-content:start; gap:.9rem;
   transition:transform .45s var(--ease), box-shadow .45s var(--ease);
 }
 /* alternate the two accent colours down the row */
-.ritual__card:nth-child(1){ --accent:var(--pom); }
+.ritual__card:nth-child(1){ --accent:var(--pom-text); }
 .ritual__card:nth-child(2){ --accent:var(--honey); }
 .ritual__card:nth-child(3){ --accent:var(--honey); }
 .ritual__card:hover{ transform:translateY(-6px); box-shadow:0 24px 50px rgba(27,27,30,.1); }
 .ritual__num{
   font-family:var(--f-display); font-size:2.6rem;
-  color:var(--accent); opacity:.28; line-height:1;
+  color:var(--accent); opacity:.5; line-height:1;
 }
 .ritual__card h3{ font-family:var(--f-display); font-size:1.7rem; }
 .ritual__card p{ color:var(--muted); margin:0; font-size:.95rem; }
 .ritual__meta{
   font-size:.7rem; letter-spacing:.18em; text-transform:uppercase;
   color:var(--gold-deep); padding-top:.6rem;
-  border-top:1px solid rgba(27,27,30,.08);
+  border-top:1px solid var(--line);
 }
 
 /* ---- the Hava TeKI'lah pitcher: the box sits inside a spinning star ---- */
@@ -722,10 +726,10 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   position:relative;
   z-index:1;
   width:min(92%, 460px);
-  background:#fff;
+  background:var(--wood-3);
   padding:2.4rem clamp(1.5rem,4vw,2.3rem) 2rem;
   border-top:3px solid var(--honey);
-  box-shadow:0 30px 70px rgba(27,27,30,.26);
+  box-shadow:0 30px 70px var(--line);
   display:grid; gap:.85rem; align-content:start;
 }
 .ritual__recipe h3{
@@ -760,26 +764,26 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
   background:currentColor;
 }
 .accent--honey{ color:var(--honey); }
-.accent--pom{ color:var(--pom); }
+.accent--pom{ color:var(--pom-text); }
 
 /* ============================================================
    Store locator
    ============================================================ */
-.locator{ display:grid; grid-template-columns:1fr 1fr; background:var(--bone); }
+.locator{ display:grid; grid-template-columns:1fr 1fr; background:var(--wood-2); }
 .locator__copy{ display:grid; align-items:center; padding:clamp(3rem,7vw,6rem) clamp(1.5rem,5vw,5rem); }
 .locator__inner h2{ text-transform:uppercase; margin-bottom:1.2rem; }
 .locator__inner p{ color:var(--muted); max-width:40ch; }
 .locator__form{ display:flex; gap:.6rem; margin:2rem 0 1.6rem; max-width:420px; }
 .locator__form input{
   flex:1; padding:.85rem 1rem;
-  border:1px solid rgba(27,27,30,.18); background:#fff;
+  border:1px solid var(--line); background:var(--wood-3); color:var(--text);
   font-family:var(--f-body); font-size:.9rem; outline:none;
 }
 .locator__form input:focus{ border-color:var(--gold-deep); }
 .locator__list{ list-style:none; margin:0; padding:0; display:grid; gap:.9rem; }
 .locator__list li{
   display:grid; gap:.15rem;
-  padding:.9rem 1rem; background:#fff;
+  padding:.9rem 1rem; background:var(--wood-3);
   border-left:2px solid var(--accent, var(--gold));
 }
 .locator__list li:nth-child(odd){ --accent:var(--pom); }
@@ -787,7 +791,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
 .locator__list strong{ font-weight:500; font-size:.95rem; }
 .locator__list span{ color:var(--muted); font-size:.82rem; }
 .locator__note{ margin-top:1.4rem; font-size:.86rem; color:var(--muted); }
-.locator__note a{ color:var(--pom); border-bottom:1px solid currentColor; }
+.locator__note a{ color:var(--pom-text); border-bottom:1px solid currentColor; }
 
 .locator__map{ position:relative; min-height:min(80vh,640px); background:#dcd6ca; }
 .locator__map img{ width:100%; height:100%; object-fit:cover; }
@@ -803,7 +807,7 @@ h1,h2,h3,h4{ margin:0; font-weight:400; line-height:1.06; }
 }
 .locator__card{
   position:absolute; top:2rem; right:2rem;
-  background:#fff; padding:1.1rem 1.3rem;
+  background:var(--wood-3); padding:1.1rem 1.3rem;
   display:grid; gap:.2rem; max-width:260px;
   box-shadow:0 18px 40px rgba(0,0,0,.16);
 }
@@ -1167,10 +1171,10 @@ body::before{
 .intro::before, .ritual::before, .clients::before, .locator__copy::before{
   content:"";
   position:absolute; inset:0;
-  background:url("assets/paper.svg") repeat;
-  background-size:420px 420px;
-  opacity:.5;
-  mix-blend-mode:multiply;
+  background:url("assets/wood.svg") repeat;
+  background-size:600px 600px;
+  opacity:.30;
+  mix-blend-mode:soft-light;
   pointer-events:none;
   z-index:0;
 }
@@ -1178,7 +1182,7 @@ body::before{
 
 /* rustic: hairline rules read like printed rules, not UI borders */
 .ritual__card, .locator__list li, .locator__card{
-  box-shadow:0 1px 0 rgba(28,29,31,.06), 0 18px 40px rgba(28,29,31,.07);
+  box-shadow:0 1px 0 var(--line), 0 18px 40px var(--line);
 }
 
 /* the bottle glows were lit gold; on stone they should be light, not warm */
@@ -1186,3 +1190,36 @@ body::before{
   background:radial-gradient(circle,
     rgba(214,209,197,.22), rgba(214,209,197,.05) 45%, transparent 70%);
 }
+
+
+/* ---- boards ----
+   Cards carry their own grain, rotated against the section behind them, so a
+   card reads as a separate piece of timber rather than a flat panel. */
+.ritual__card, .ritual__recipe, .locator__list li, .locator__card{
+  position:relative;
+  isolation:isolate;
+  border:1px solid var(--line);
+}
+.ritual__card::after, .ritual__recipe::after,
+.locator__list li::after, .locator__card::after{
+  content:"";
+  position:absolute; inset:0;
+  background:url("assets/wood.svg") repeat;
+  background-size:340px 340px;
+  opacity:.22;
+  mix-blend-mode:soft-light;
+  pointer-events:none;
+  z-index:-1;
+}
+.ritual__card > *, .ritual__recipe > *{ position:relative; z-index:1; }
+
+/* text that used to sit on white */
+.ritual__card p, .ritual__recipe p, .locator__list span,
+.locator__card span, .clients__intro p, .intro__copy p,
+.ritual__head p, .locator__inner p{ color:var(--muted); }
+.ritual__card h3, .ritual__recipe h3, .locator__list strong,
+.locator__card strong, .ritual__lede, .ritual__recipe strong{ color:var(--text) !important; }
+.locator__form input::placeholder, .newsletter__form input::placeholder{ color:rgba(236,228,214,.34); }
+.locator__hours{ color:#7fae86 !important; }
+.intro__specs strong{ color:var(--text); }
+.clients__logos li{ color:rgba(236,228,214,.42); }

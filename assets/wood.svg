@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <filter id="w">
+    <!-- stretched noise reads as long grain running with the board -->
+    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.42" numOctaves="5" seed="7" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.62"/></feComponentTransfer>
+  </filter>
+  <rect width="600" height="600" filter="url(#w)"/>
+</svg>
