@@ -1,6 +1,6 @@
-# Teki'ah Gedolah
+# Teki'lah Gedolah
 
-Single-product brand site for **Teki'ah Gedolah** tequila — a kosher-certified
+Single-product brand site for **Teki'lah Gedolah** tequila — a kosher-certified
 Reposado Cristalino, 100% agave azul, produced in Tequila, Jalisco under the
 El Poderío mark and imported by Helmsman Imports, Austin, TX.
 

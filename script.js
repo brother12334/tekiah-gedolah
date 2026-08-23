@@ -1,5 +1,5 @@
 /* ============================================================
-   Teki'ah Gedolah — site behaviour
+   Teki'lah Gedolah — site behaviour
    ============================================================ */
 (function () {
   'use strict';
@@ -65,7 +65,7 @@
 
   const INDEX = [
     { name: 'Reposado Cristalino — 100% agave azul', tag: 'Bottle', href: '#bottle' },
-    { name: "Teki'ah Gedolah — what the name means", tag: 'Page', href: '#story' },
+    { name: "Teki'lah Gedolah — what the name means", tag: 'Page', href: '#story' },
     { name: 'Tasting notes — nose, palate, finish', tag: 'Bottle', href: '#bottle' },
     { name: 'Kosher certification',        tag: 'Bottle', href: '#bottle' },
     { name: 'NOM 1438 · Tequila, Jalisco', tag: 'Bottle', href: '#bottle' },

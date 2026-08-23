@@ -1,4 +1,4 @@
-# Brand assets — Teki'ah Gedolah
+# Brand assets — Teki'lah Gedolah
 
 ## Logo
 
@@ -45,6 +45,7 @@ became 676 KB with no visible loss.
 | `cut-front.webp` | IMG_0037 | Our Story (lower left), The Nose panel |
 | `cut-back.webp` | IMG_0030 | Our Story (lower right), The Back Label panel |
 | `band-wide.jpg` | IMG_0004 | Full-bleed band ("The Table") — kept as a photo |
+| `cut-studio.webp` | ChatGPT-generated studio render | Hero slide 1 |
 
 Cutouts float on a gold radial glow with a drop shadow, matching the reference
 layout. `band-wide.jpg` is deliberately *not* cut out — a full-bleed section
@@ -66,7 +67,7 @@ holiday table. Both would replace stock-feeling sections with real ones.
 
 Read off the back label and now reflected in the copy:
 
-- **El Poderío™**, exclusively produced for Teki'ah Gedolah
+- **El Poderío™**, exclusively produced for Teki'lah Gedolah
 - **Reposado Cristalino**, 100% Agave Azul
 - 1 litre, 80 proof, 40% Alc./Vol
 - **NOM 1438 CRT**; bottled by Destiladora del Valle de Tequila, S.A. de C.V.,
@@ -85,3 +86,33 @@ Still placeholder — replace before launch:
 - **The three cocktails** in The Ritual are invented recipes.
 - Earlier drafts claimed an añejo with a honey-and-pomegranate barrel finish,
   a 5,787-bottle run and a price. All fabricated, all now removed.
+
+
+## Two things to settle before launch
+
+### The brand name was wrong, and is now fixed
+
+The site said **Teki'ah Gedolah** in 26 places. That is the correct Hebrew for
+the shofar blast (תקיעה גדולה), but it is *not* what the label says. The bottle
+reads **TEKI'LAH GEDOLAH** — the whole point is that one letter moves so the
+word becomes "tequila". Corrected site-wide.
+
+### The hero image is a render, and its label is misspelled again
+
+`cut-studio.webp` is cut from `ChatGPT Image Aug 23, 2026, 03_55_51 PM.png` —
+an AI-generated render, not a photograph of the product. Its label reads
+**TEKILLAH GEDOLAH**: no apostrophe, double L. That is a third spelling, and it
+does not match the real bottle.
+
+So the header currently reads Teki'lah while the hero bottle reads TEKILLAH, on
+the same screen. Options, best first:
+
+1. Re-generate the render with the label spelled **TEKI'LAH GEDOLAH**, and drop
+   it in over `cut-studio.webp`.
+2. Photograph the real bottle on black. The render is only imitating a studio
+   sweep that a sheet of black paper and one softbox would give you for real.
+3. Revert hero slide 1 to `cut-hero.webp`, which is the actual bottle.
+
+Also worth knowing: a render is fine for atmosphere, but a product shot on a
+retail or importer-facing page is a representation of the goods. If a customer
+could take it for a photograph of what ships, it should be the real bottle.
